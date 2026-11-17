@@ -310,21 +310,26 @@ class Component extends DCLogic {
       }
     });
   }
-  async remove(id, name, silent) {
-    const key = id + '|' + name;
-    const mail = this.state.mails[key];
-    if (!mail) return this.toast('Ofmellen geet nëmmen op dem Apparat, wou s de dech ageschriwwen hues.');
-    const res = await this.call({ action: 'cancel', id, name, mail });
+  // meld eng oder méi Persoune vun enger Schicht of (eng Mail fir all)
+  async cancel(id, names, mail) {
+    const res = await this.call({ action: 'cancel', id, names, mail });
     if (res.shifts) this.setState({ shifts: res.shifts });
-    if (!res.ok) return this.toast(res.msg || 'Ofmellen huet net geklappt.');
-    const mails = { ...this.state.mails }; delete mails[key];
-    this.save({ mine: this.state.mine.filter(m => m !== key), mails });
-    if (!silent) this.toast(name + ' ass ofgemellt.');
+    if (!res.ok) { this.toast(res.msg || 'Ofmellen huet net geklappt.'); return null; }
+    const keys = names.map(n => id + '|' + n);
+    const mails = { ...this.state.mails }; keys.forEach(k => delete mails[k]);
+    this.save({ mine: this.state.mine.filter(m => !keys.includes(m)), mails });
+    return res;
+  }
+  async remove(id, name) {
+    const mail = this.state.mails[id + '|' + name];
+    if (!mail) return this.toast('Ofmellen geet nëmmen op dem Apparat, wou s de dech ageschriwwen hues.');
+    const res = await this.cancel(id, [name], mail);
+    if (res) this.toast(name + ' ass ofgemellt.' + (res.mailSent === false ? '' : ' Bestätegung ass per Mail ënnerwee.'));
   }
   async undoAll(u) {
     this.setState({ confirm: null });
-    for (const n of u.names) await this.remove(u.id, n, true);
-    this.toast(u.names.length > 1 ? 'D\'Aschreiwung ass réckgängeg gemaach.' : 'Du bass ofgemellt.');
+    const res = await this.cancel(u.id, u.names, u.mail);
+    if (res) this.toast((u.names.length > 1 ? 'D\'Aschreiwung ass réckgängeg gemaach.' : 'Du bass ofgemellt.') + (res.mailSent === false ? '' : ' Bestätegung ass per Mail ënnerwee.'));
   }
   renderVals() {
     const { shifts, mine, openId, draftNames, draftMail, error, toast, loading, loadError, busy } = this.state;
