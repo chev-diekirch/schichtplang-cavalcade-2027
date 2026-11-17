@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="lb">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schichtplang CHEV – Cavalcade 2027</title>
+<meta name="theme-color" content="#2a4996">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Schichtplang Cavalcade">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"><style>*{box-sizing:border-box}body{margin:0;background:#2a4996;font-family:'Open Sans',system-ui,sans-serif;color:#1b2a55;-webkit-font-smoothing:antialiased}a{color:#2a4996}a:hover{color:#1f3877}input::placeholder{color:#6b7493}@keyframes toastIn{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}</style></helmet>
+<div style="min-height:100vh;display:flex;justify-content:center;background:#2a4996">
+  <div style="width:100%;max-width:440px;min-height:100vh;background:#fbf5df;position:relative;display:flex;flex-direction:column;box-shadow:0 0 40px rgba(0,0,0,.25)">
+
+    <header style="position:relative;background:#2a4996;overflow:hidden;padding:18px 20px 28px;display:flex;flex-direction:column;gap:22px;min-height:230px">
+      <svg aria-hidden="true" width="210" height="210" viewBox="0 0 210 210" style="position:absolute;right:-40px;top:-40px;pointer-events:none">
+        <path d="M20 40 C60 20, 80 80, 120 50 S180 30, 200 70" fill="none" stroke="#f0c42d" stroke-width="4" stroke-linecap="round" opacity=".9"></path>
+        <path d="M40 120 C80 95, 110 150, 150 120 S190 105, 215 140" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".45"></path>
+        <path d="M70 180 C100 160, 130 200, 170 175" fill="none" stroke="#e8452c" stroke-width="4" stroke-linecap="round" opacity=".85"></path>
+        <circle cx="60" cy="80" r="6" fill="#e8452c"></circle>
+        <circle cx="150" cy="90" r="5" fill="#f0c42d"></circle>
+        <circle cx="110" cy="20" r="4" fill="#ffffff" opacity=".7"></circle>
+        <circle cx="185" cy="160" r="6" fill="#f0c42d"></circle>
+        <rect x="95" y="105" width="10" height="10" rx="2" transform="rotate(25 100 110)" fill="#ffffff" opacity=".7"></rect>
+        <rect x="30" y="160" width="9" height="9" rx="2" transform="rotate(-20 34 164)" fill="#f0c42d"></rect>
+        <rect x="165" y="45" width="9" height="9" rx="2" transform="rotate(40 169 49)" fill="#e8452c"></rect>
+      </svg>
+      <div style="position:relative;display:flex;align-items:center;gap:14px">
+        <img src="assets/cavalcade-logo.svg" alt="Cavalcade Diekirch" style="width:64px;height:auto;display:block;border-radius:0 0 6px 6px;box-shadow:0 4px 14px -6px rgba(0,0,0,.45)">
+        <span style="width:1px;align-self:stretch;background:rgba(255,255,255,.35)"></span>
+        <div style="background:#fff;border-radius:12px;padding:5px;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)">
+          <img src="assets/chev-logo.jpg" alt="CHEV Handball Diekirch" style="width:56px;height:auto;display:block">
+        </div>
+      </div>
+      <div style="position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:auto">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f0c42d">Schichtplang</div>
+        <h1 style="margin:0;font-family:Merriweather,Georgia,serif;font-weight:900;font-size:26px;line-height:1.2;color:#f0c42d">Cavalcade Diekirch 2027</h1>
+        <div style="font-family:Merriweather,Georgia,serif;font-weight:300;font-size:16px;color:#fff">{{ dayTitle }}</div>
+      </div>
+    </header>
+
+    <div style="background:#f0c42d;padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px">
+      <div style="font-family:Merriweather,Georgia,serif;font-weight:300;font-size:21px;line-height:1.25;color:#2a4996">Comptoir an der Al Seeërei</div>
+      <p style="margin:0;font-size:14px;line-height:1.5;color:#1b2a55">Sich der eng Schicht eraus a schreif dech mat Numm an E-Mail an. Du kanns och direkt e puer Leit mat aschreiwen. Merci fir d'Mathëllefen!</p>
+      <sc-if value="{{ hasMine }}" hint-placeholder-val="{{ false }}">
+        <div style="align-self:flex-start;margin-top:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#f0c42d;background:#2a4996;border-radius:999px;padding:7px 12px;white-space:nowrap">{{ mineLabel }}</div>
+      </sc-if>
+    </div>
+
+    <main style="flex:1;padding:20px 16px 120px;display:flex;flex-direction:column;gap:12px">
+      <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:14px;line-height:1.5;color:#4f5a7c;padding:0 4px">{{ statusText }}</div>
+      </sc-if>
+      <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="1">
+        <section style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:0 4px 4px">
+            <h2 style="margin:0;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#2a4996;font-weight:700">{{ sec.stand }}</h2>
+            <span style="font-size:12px;color:#4f5a7c;font-weight:600">Al Seeërei</span>
+          </div>
+          <sc-for list="{{ sec.shifts }}" as="s" hint-placeholder-count="2">
+            <div style="border-radius:14px;padding:14px 14px 14px 16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(27,42,85,.08);background:{{ s.cardBg }}">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:0;flex:1">
+                  <span style="font-family:Merriweather,Georgia,serif;font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;color:#1b2a55">{{ s.time }}</span>
+                  <div style="height:8px;border-radius:999px;background:#f6e7a6;overflow:hidden;box-shadow:inset 0 0 0 1px #e2c55a">
+                    <div style="height:8px;width:{{ s.pct }};background:#2a4996;border-radius:999px"></div>
+                  </div>
+                  <span style="font-size:13px;color:#4f5a7c">{{ s.freeLabel }}</span>
+                </div>
+                <sc-if value="{{ s.showJoin }}" hint-placeholder-val="{{ true }}">
+                  <button type="button" onClick="{{ s.onToggle }}" style="flex:none;background:#2a4996;color:#f0c42d;border:0;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;font-family:inherit;min-height:44px" style-hover="background:#1f3877" style-active="transform:scale(.97)">Aschreiwen</button>
+                </sc-if>
+                <sc-if value="{{ s.showClose }}" hint-placeholder-val="{{ false }}">
+                  <button type="button" onClick="{{ s.onToggle }}" style="flex:none;background:#eef0f7;color:#2a4996;border:0;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;min-height:44px">Ofbriechen</button>
+                </sc-if>
+                <sc-if value="{{ s.isMine }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex:none;font-size:13px;font-weight:700;color:#2a4996;background:#f0c42d;border-radius:999px;padding:7px 12px">Du bass dobäi</span>
+                </sc-if>
+                <sc-if value="{{ s.isFullOther }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex:none;font-size:13px;color:#4f5a7c;background:#eef0f7;border-radius:999px;padding:7px 12px;font-weight:700">Voll</span>
+                </sc-if>
+              </div>
+
+              <sc-if value="{{ s.showMoreBtn }}" hint-placeholder-val="{{ false }}">
+                <button type="button" onClick="{{ s.onToggle }}" style="align-self:flex-start;background:none;border:0;padding:0;color:#2a4996;font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;font-family:inherit;min-height:32px">Nach een aschreiwen</button>
+              </sc-if>
+
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #eef0f7;padding-top:10px">
+                <span style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#4f5a7c;font-weight:700">{{ s.peopleLabel }}</span>
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ s.people }}" as="p" hint-placeholder-count="0">
+                    <sc-if value="{{ p.mine }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:13px;padding:4px 10px;border-radius:999px;background:#f0c42d;color:#1b2a55;font-weight:700;display:flex;align-items:center;gap:6px;white-space:nowrap">{{ p.name }}<button type="button" onClick="{{ p.onRemove }}" style="border:0;background:none;color:#2a4996;font-size:12px;text-decoration:underline;padding:0;cursor:pointer;font-family:inherit">ofmellen</button></span>
+                    </sc-if>
+                    <sc-if value="{{ p.other }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-size:13px;padding:4px 10px;border-radius:999px;background:#eef0f7;color:#1b2a55;white-space:nowrap">{{ p.name }}</span>
+                    </sc-if>
+                  </sc-for>
+                  <sc-if value="{{ s.hasFree }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size:13px;padding:3px 10px;border-radius:999px;border:1.5px dashed #d9a90f;color:#7a5e00;white-space:nowrap">{{ s.freeChip }}</span>
+                  </sc-if>
+                </div>
+              </div>
+
+              <sc-if value="{{ s.isOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:6px;padding-top:2px">
+                  <sc-for list="{{ s.names }}" as="n" hint-placeholder-count="1">
+                    <div style="display:flex;align-items:flex-end;gap:6px">
+                      <label style="flex:1;font-size:12px;font-weight:700;color:#4f5a7c">{{ n.label }}
+                        <input value="{{ n.value }}" onChange="{{ n.onInput }}" onKeyDown="{{ s.onKey }}" placeholder="{{ n.placeholder }}" autocomplete="off" style="margin-top:4px;padding:12px 14px;border:1.5px solid #d3d8e8;border-radius:10px;font-size:16px;font-family:inherit;background:#f8f9fc;color:#1b2a55;outline:none;width:100%" style-focus="border-color:#2a4996;background:#fff">
+                      </label>
+                      <sc-if value="{{ n.canRemove }}" hint-placeholder-val="{{ false }}">
+                        <button type="button" onClick="{{ n.onRemove }}" aria-label="{{ n.removeLabel }}" style="flex:none;width:44px;height:46px;border:1.5px solid #d3d8e8;border-radius:10px;background:#fff;color:#4f5a7c;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"></path></svg>
+                        </button>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                  <sc-if value="{{ s.canAdd }}" hint-placeholder-val="{{ true }}">
+                    <button type="button" onClick="{{ s.onAdd }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;background:none;border:1.5px dashed #2a4996;color:#2a4996;border-radius:10px;padding:0 14px;min-height:44px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+                      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 2v10M2 7h10"></path></svg>
+                      Nach eng Persoun
+                    </button>
+                  </sc-if>
+                  <label style="font-size:12px;font-weight:700;color:#4f5a7c">E-Mail
+                    <input type="email" inputmode="email" value="{{ s.draftMail }}" onChange="{{ s.onMail }}" onKeyDown="{{ s.onKey }}" placeholder="E-Mail fir d'Bestätegung" autocomplete="email" style="margin-top:4px;padding:12px 14px;border:1.5px solid #d3d8e8;border-radius:10px;font-size:16px;font-family:inherit;background:#f8f9fc;color:#1b2a55;outline:none;width:100%" style-focus="border-color:#2a4996;background:#fff">
+                  </label>
+                  <span style="font-size:12px;color:#4f5a7c;line-height:1.4">Deng Mail gesinn nëmmen d'Organisateuren – ëffentlech stinn just d'Nimm.</span>
+                  <button type="button" onClick="{{ s.onSubmit }}" style="background:#f0c42d;color:#1b2a55;border:0;border-radius:10px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;font-family:inherit;min-height:46px" style-hover="background:#e6b81c">{{ s.submitLabel }}</button>
+                  <sc-if value="{{ s.hasError }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:13px;color:#b3261e">{{ s.error }}</span>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </section>
+      </sc-for>
+    </main>
+
+    <sc-if value="{{ hasConfirm }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;inset:0;z-index:30;background:rgba(20,32,70,.55);display:flex;align-items:flex-end;justify-content:center">
+        <div style="width:100%;max-width:440px;max-height:96vh;overflow:auto;background:#fbf5df;border-radius:22px 22px 0 0;display:flex;flex-direction:column;animation:toastIn .25s ease-out">
+          <div style="background:#2a4996;padding:22px 20px 18px;display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#f0c42d;font-weight:700">Ageschriwwen</div>
+            <h3 style="margin:0;font-family:Merriweather,Georgia,serif;font-weight:900;font-size:26px;line-height:1.15;color:#f0c42d">Merci, {{ cf.first }}!</h3>
+            <sc-if value="{{ cf.mailSent }}" hint-placeholder-val="{{ true }}">
+              <p style="margin:0;font-size:14px;line-height:1.45;color:#dfe5f5">Mir hunn eng Bestätegung un <strong style="color:#fff">{{ cf.mail }}</strong> geschéckt.</p>
+            </sc-if>
+            <sc-if value="{{ cf.mailFailed }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;font-size:14px;line-height:1.45;color:#dfe5f5">D'Aschreiwung ass gespäichert. D'Bestätegungsmail un <strong style="color:#fff">{{ cf.mail }}</strong> konnt leider net geschéckt ginn.</p>
+            </sc-if>
+          </div>
+          <div style="padding:16px 20px 26px;display:flex;flex-direction:column;gap:14px">
+            <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(27,42,85,.08)">
+              <div style="padding:10px 14px;border-bottom:1px solid #eef0f7;font-size:12px;color:#4f5a7c;display:flex;flex-direction:column;gap:2px">
+                <span><strong style="color:#1b2a55">Vun:</strong> Cavalcade Diekirch – Schichtplang CHEV</span>
+                <span><strong style="color:#1b2a55">Sujet:</strong> Deng Schicht op der Cavalcade Diekirch 2027</span>
+              </div>
+              <div style="padding:14px;font-size:14px;line-height:1.5;color:#1b2a55;display:flex;flex-direction:column;gap:10px">
+                <span>Moien {{ cf.first }},<br>{{ cf.intro }}</span>
+                <div style="background:#f0c42d;border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-family:Merriweather,Georgia,serif;font-weight:700;font-size:16px;color:#2a4996">{{ cf.stand }}</span>
+                  <span>{{ cf.when }}</span>
+                  <span style="font-size:13px">Treffpunkt: Comptoir · Al Seeërei</span>
+                  <span style="font-weight:700">{{ cf.who }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;border:1.5px solid #d3d8e8;border-radius:10px;padding:10px 12px">
+                  <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2a4996" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"></rect><path d="M3 8h14M7 2.5v3M13 2.5v3"></path></svg>
+                  <span style="display:flex;flex-direction:column"><strong style="font-size:13px">Cavalcade-Schicht.ics</strong><span style="font-size:12px;color:#4f5a7c">Aluedung fir de Kalenner</span></span>
+                </div>
+                <span style="color:#4f5a7c">Mir erënneren dech eng Woch an een Dag virdrun nach eng Kéier per Mail. Wann s de awer net kanns, mell dech w.e.g. rechtzäiteg of.</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button type="button" onClick="{{ undo }}" style="flex:1;background:#fff;color:#2a4996;border:1.5px solid rgba(42,73,150,.25);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;min-height:48px">Réckgängeg</button>
+              <button type="button" onClick="{{ closeConfirm }}" style="flex:1.4;background:#2a4996;color:#f0c42d;border:0;border-radius:10px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;font-family:inherit;min-height:48px" style-hover="background:#1f3877">Fäerdeg</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;left:0;right:0;bottom:20px;display:flex;justify-content:center;padding:0 16px;z-index:20;pointer-events:none">
+        <div style="width:100%;max-width:408px;padding:14px 16px;border-radius:12px;color:#fff;background:#1f3877;font-size:14px;box-shadow:0 10px 30px -10px rgba(20,32,70,.6);animation:toastIn .25s ease-out">{{ toastText }}</div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// URL vun der Apps-Script-Web-App (Bereetstellen -> Web-App -> URL, hält op /exec op)
+const API = 'https://script.google.com/macros/s/AKfycbzR1hB_F1iV-ThjJJW9pW-Aw6lE6n7JlkgBUzrrADc_7_sQhI_h6xQq-8NN6iK5AR9jJg/exec';
+
+const KEY = 'helferplan-cavalcade-2027';
+const STAENDE = ['Comptoir'];
+const MOUNTEN = ['Januar', 'Februar', 'Mäerz', 'Abrëll', 'Mee', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+const DEEG = ['Sonndeg', 'Méindeg', 'Dënschdeg', 'Mëttwoch', 'Donneschdeg', 'Freideg', 'Samschdeg'];
+function datumLaang(iso) {
+  const [y, m, d] = String(iso || '2027-02-07').split('-').map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return DEEG[dt.getUTCDay()] + ', ' + d + '. ' + MOUNTEN[m - 1] + ' ' + y;
+}
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    this.state = {
+      shifts: [], loading: true, loadError: false, busy: false,
+      mine: saved?.mine || [], myName: saved?.myName || '', myMail: saved?.myMail || '', mails: saved?.mails || {},
+      openId: null, draftNames: [''], draftMail: '', error: '', toast: null, confirm: null
+    };
+  }
+  // späichert nëmmen dat, wat zu dësem Apparat gehéiert (eegen Aschreiwungen, Numm, Mail)
+  save(patch) {
+    this.setState(patch, () => {
+      const { mine, myName, myMail, mails } = this.state;
+      try { localStorage.setItem(KEY, JSON.stringify({ mine, myName, myMail, mails })); } catch (e) {}
+    });
+  }
+  componentDidMount() {
+    this.load();
+    this._vis = () => { if (!document.hidden) this.load(); };
+    document.addEventListener('visibilitychange', this._vis);
+  }
+  componentWillUnmount() {
+    clearTimeout(this._t);
+    document.removeEventListener('visibilitychange', this._vis);
+  }
+  async load() {
+    try {
+      const r = await fetch(API);
+      const d = await r.json();
+      if (!d.ok) throw new Error('api');
+      this.setState({ shifts: d.shifts, loading: false, loadError: false });
+    } catch (e) {
+      this.setState({ loading: false, loadError: this.state.shifts.length === 0 });
+    }
+  }
+  // JSON als text/plain schécken: dann äntwert Apps Script ouni CORS-Virufro
+  async call(payload) {
+    try {
+      const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+      return await r.json();
+    } catch (e) {
+      return { ok: false, msg: 'Keng Verbindung – probéier w.e.g. nach eng Kéier.' };
+    }
+  }
+  toast(text) {
+    clearTimeout(this._t);
+    this.setState({ toast: text });
+    this._t = setTimeout(() => this.setState({ toast: null }), 3000);
+  }
+  toggle(id) {
+    const sh = this.state.shifts.find(x => x.id === id);
+    if (sh && sh.namen.length >= sh.plaetze) return this.setState({ openId: null, error: '' });
+    if (this.state.openId === id) return this.setState({ openId: null, error: '' });
+    const already = sh && sh.namen.some(n => this.state.mine.includes(id + '|' + n));
+    this.setState({ openId: id, draftNames: [already ? '' : this.state.myName], draftMail: this.state.myMail, error: '' });
+  }
+  setName(i, v) {
+    const draftNames = this.state.draftNames.slice(); draftNames[i] = v;
+    this.setState({ draftNames, error: '' });
+  }
+  async submit(id) {
+    if (this.state.busy) return;
+    const s = this.state.shifts.find(x => x.id === id);
+    const free = s.plaetze - s.namen.length;
+    const names = this.state.draftNames.map(n => n.trim().replace(/\s+/g, ' ')).filter(Boolean);
+    const mail = this.state.draftMail.trim().toLowerCase();
+    if (!names.length) return this.setState({ error: 'Gëff w.e.g. däin Numm an.' });
+    if (names.some(n => n.length < 2)) return this.setState({ error: 'Een Numm ass e bëssen ze kuerz.' });
+    const lower = names.map(n => n.toLowerCase());
+    if (new Set(lower).size !== lower.length) return this.setState({ error: 'Een Numm steet zweemol an der Lëscht.' });
+    const dobai = s.namen.find(n => lower.includes(n.toLowerCase()));
+    if (dobai) return this.setState({ error: dobai + ' ass fir dës Schicht schonn ageschriwwen.' });
+    if (names.length > free) return this.setState({ error: 'Et sinn nëmme méi ' + free + (free === 1 ? ' Plaz' : ' Plaze') + ' fräi.' });
+    if (!mail) return this.setState({ error: 'Gëff w.e.g. eng E-Mail-Adress an – dohinner schécke mir d\'Bestätegung.' });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) return this.setState({ error: 'Dës E-Mail-Adress gesäit net richteg aus.' });
+    this.setState({ busy: true, error: '' });
+    const res = await this.call({ action: 'signup', id, names, mail });
+    if (res.shifts) this.setState({ shifts: res.shifts });
+    if (!res.ok) return this.setState({ busy: false, error: res.msg || 'Et ass e Feeler geschitt. Probéier w.e.g. nach eng Kéier.' });
+    const done = res.names || names;
+    const keys = done.map(n => id + '|' + n);
+    const mails = { ...this.state.mails }; keys.forEach(k => { mails[k] = mail; });
+    const multi = done.length > 1;
+    this.save({
+      mine: [...this.state.mine, ...keys],
+      myName: this.state.myName || done[0], myMail: mail, mails,
+      openId: null, draftNames: [''], draftMail: '', error: '', busy: false,
+      confirm: {
+        id, names: done, mail, first: done[0].split(' ')[0], stand: s.stand,
+        mailSent: res.mailSent !== false, mailFailed: res.mailSent === false,
+        intro: multi ? 'du hues ' + done.length + ' Persoune fir dës Schicht ageschriwwen:' : 'du bass fir dës Schicht ageschriwwen:',
+        who: multi ? done.join(', ') : '',
+        when: datumLaang(s.datum) + ' · ' + s.start + '–' + s.ende + ' Auer'
+      }
+    });
+  }
+  async remove(id, name, silent) {
+    const key = id + '|' + name;
+    const mail = this.state.mails[key];
+    if (!mail) return this.toast('Ofmellen geet nëmmen op dem Apparat, wou s de dech ageschriwwen hues.');
+    const res = await this.call({ action: 'cancel', id, name, mail });
+    if (res.shifts) this.setState({ shifts: res.shifts });
+    if (!res.ok) return this.toast(res.msg || 'Ofmellen huet net geklappt.');
+    const mails = { ...this.state.mails }; delete mails[key];
+    this.save({ mine: this.state.mine.filter(m => m !== key), mails });
+    if (!silent) this.toast(name + ' ass ofgemellt.');
+  }
+  async undoAll(u) {
+    this.setState({ confirm: null });
+    for (const n of u.names) await this.remove(u.id, n, true);
+    this.toast(u.names.length > 1 ? 'D\'Aschreiwung ass réckgängeg gemaach.' : 'Du bass ofgemellt.');
+  }
+  renderVals() {
+    const { shifts, mine, openId, draftNames, draftMail, error, toast, loading, loadError, busy } = this.state;
+    const sections = STAENDE.filter(st => shifts.some(s => s.stand === st)).map(st => ({
+      stand: st,
+      shifts: shifts.filter(s => s.stand === st).map(s => {
+        const free = s.plaetze - s.namen.length, full = free <= 0;
+        const myHere = s.namen.filter(n => mine.includes(s.id + '|' + n));
+        const isMine = myHere.length > 0, isOpen = openId === s.id && !full;
+        const filled = draftNames.filter(n => n.trim()).length;
+        return {
+          time: s.start + ' – ' + s.ende,
+          pct: Math.min(100, Math.round(s.namen.length / s.plaetze * 100)) + '%',
+          freeLabel: full ? 'all ' + s.plaetze + ' Plaze besat' : free === 1 ? 'nach 1 Plaz fräi' : 'nach ' + free + ' vu ' + s.plaetze + ' Plaze fräi',
+          cardBg: full && !isMine ? '#f4f1e4' : '#fff',
+          peopleLabel: s.namen.length ? 'Ageschriwwen (' + s.namen.length + '/' + s.plaetze + ')' : 'Nach keen ageschriwwen',
+          hasFree: free > 0, freeChip: free === 1 ? '1 Plaz fräi' : free + ' Plaze fräi',
+          showJoin: !full && !isMine && !isOpen, showClose: isOpen, isMine, isFullOther: full && !isMine,
+          showMoreBtn: isMine && !full && !isOpen,
+          people: s.namen.map(n => { const m = myHere.includes(n); return { name: n, mine: m, other: !m, onRemove: () => this.remove(s.id, n) }; }),
+          isOpen, draftMail: isOpen ? draftMail : '',
+          names: isOpen ? draftNames.map((v, i) => ({
+            value: v,
+            label: i === 0 ? 'Numm' : 'Persoun ' + (i + 1),
+            placeholder: i === 0 ? 'Däin Numm' : 'Numm vun der Persoun',
+            canRemove: i > 0,
+            removeLabel: 'Persoun ' + (i + 1) + ' ewechhuelen',
+            onInput: e => this.setName(i, e.target.value),
+            onRemove: () => this.setState({ draftNames: draftNames.filter((_, j) => j !== i), error: '' })
+          })) : [],
+          canAdd: isOpen && draftNames.length < free,
+          onAdd: () => this.setState({ draftNames: [...draftNames, ''], error: '' }),
+          submitLabel: busy ? 'Een Moment …' : filled > 1 ? filled + ' Persoune verbindlech aschreiwen' : 'Verbindlech aschreiwen',
+          onToggle: () => this.toggle(s.id),
+          onMail: e => this.setState({ draftMail: e.target.value, error: '' }),
+          onKey: e => { if (e.key === 'Enter') this.submit(s.id); if (e.key === 'Escape') this.toggle(s.id); },
+          onSubmit: () => this.submit(s.id),
+          hasError: isOpen && !!error, error
+        };
+      })
+    }));
+    const statusText = loading ? 'Plang gëtt gelueden …'
+      : loadError ? 'De Plang konnt net gelueden ginn. Probéier w.e.g. d\'Säit nei ze lueden.'
+      : !shifts.length ? 'Et sinn nach keng Schichte virgesinn.' : '';
+    return {
+      sections,
+      hasStatus: !!statusText, statusText,
+      dayTitle: datumLaang(shifts[0]?.datum),
+      hasMine: mine.length > 0,
+      mineLabel: mine.length === 1 ? '1 Persoun ageschriwwen' : mine.length + ' Persounen ageschriwwen',
+      hasToast: !!toast, toastText: toast,
+      hasConfirm: !!this.state.confirm, cf: this.state.confirm || {},
+      closeConfirm: () => this.setState({ confirm: null }),
+      undo: () => { const u = this.state.confirm; if (u) this.undoAll(u); }
+    };
+  }
+}
+</script>
+</body>
+</html>
